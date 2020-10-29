@@ -17,18 +17,17 @@
 # ##### END GPL LICENSE BLOCK #####
 
 bl_info = {
-    "name":        "Addon Updater Demo",
+    "name": "Addon Updater Demo",
     "description": "Demo addon for showcasing the blender-addon-updater module",
-    "author":      "Patrick W. Crawford",
-    "version":     (1, 0, 9),
-    "blender":     (2, 80, 0),
-    "location":    "View 3D > Tool Shelf > Demo Updater",
-    "warning":     "",  # used for warning icon and text in addons panel
-    "wiki_url":    "https://github.com/CGCookie/blender-addon-updater",
+    "author": "Patrick W. Crawford",
+    "version": (1, 0, 9),
+    "blender": (2, 80, 0),
+    "location": "View 3D > Tool Shelf > Demo Updater",
+    "warning": "",  # used for warning icon and text in addons panel
+    "wiki_url": "https://github.com/CGCookie/blender-addon-updater",
     "tracker_url": "https://github.com/CGCookie/blender-addon-updater/issues",
-    "category":    "System"
-    }
-
+    "category": "System"
+}
 
 import bpy
 
@@ -86,14 +85,14 @@ class DemoPreferences(bpy.types.AddonPreferences):
         name="Auto-check for Update",
         description="If enabled, auto-check for updates using an interval",
         default=False,
-        )
+    )
 
     updater_interval_months = bpy.props.IntProperty(
         name='Months',
         description="Number of months between checking for updates",
         default=0,
         min=0
-        )
+    )
 
     updater_interval_days = bpy.props.IntProperty(
         name='Days',
@@ -101,7 +100,7 @@ class DemoPreferences(bpy.types.AddonPreferences):
         default=7,
         min=0,
         max=31
-        )
+    )
 
     updater_interval_hours = bpy.props.IntProperty(
         name='Hours',
@@ -109,7 +108,7 @@ class DemoPreferences(bpy.types.AddonPreferences):
         default=0,
         min=0,
         max=23
-        )
+    )
 
     updater_interval_minutes = bpy.props.IntProperty(
         name='Minutes',
@@ -117,7 +116,7 @@ class DemoPreferences(bpy.types.AddonPreferences):
         default=0,
         min=0,
         max=59
-        )
+    )
 
     def draw(self, context):
         layout = self.layout

@@ -24,23 +24,23 @@ https://github.com/CGCookie/blender-addon-updater
 
 __version__ = "1.0.10"
 
-import errno
-import traceback
-import platform
-import ssl
-import urllib.request
-import urllib
-import os
-import json
-import zipfile
-import shutil
-import threading
 import fnmatch
+import json
+import os
+import platform
+import shutil
+import ssl
+import threading
+import traceback
+import urllib
+import urllib.request
+import zipfile
 from datetime import datetime, timedelta
 
+import addon_utils
 # blender imports, used in limited cases
 import bpy
-import addon_utils
+import errno
 
 # -----------------------------------------------------------------------------
 # Define error messages/notices & hard coded globals
@@ -57,6 +57,7 @@ class SingletonUpdater:
     This is the singleton class to reference a copy from,
     it is the shared module level class
     """
+
     def __init__(self):
 
         self._engine = GithubEngine()
@@ -113,7 +114,7 @@ class SingletonUpdater:
         self._addon = __package__.lower()
         self._addon_package = __package__  # must not change
         self._updater_path = os.path.join(os.path.dirname(__file__),
-                                        self._addon + "_updater")
+                                          self._addon + "_updater")
         self._addon_root = os.path.dirname(__file__)
         self._json = dict()
         self._error = None
@@ -577,8 +578,7 @@ class SingletonUpdater:
 
     def __str__(self):
         return "Updater, with user: {a}, repository: {b}, url: {c}".format(
-                        a=self._user,
-                        b=self._repo, c=self.form_repo_url())
+            a=self._user, b=self._repo, c=self.form_repo_url())
 
     # -------------------------------------------------------------------------
     # API-related functions
@@ -846,7 +846,7 @@ class SingletonUpdater:
         # save the date for future ref
         now = datetime.now()
         self._json["backup_date"] = "{m}-{d}-{yr}".format(
-                m=now.strftime("%B"), d=now.day, yr=now.year)
+            m=now.strftime("%B"), d=now.day, yr=now.year)
         self.save_updater_json()
 
     def restore_backup(self):
@@ -857,7 +857,7 @@ class SingletonUpdater:
             print("Backing up current addon folder")
         backuploc = os.path.join(self._updater_path, "backup")
         tempdest = os.path.join(self._addon_root, os.pardir,
-                        self._addon + "_updater_backup_temp")
+                                self._addon + "_updater_backup_temp")
         tempdest = os.path.abspath(tempdest)
 
         # make the copy
@@ -1318,7 +1318,6 @@ class SingletonUpdater:
             # situation where branches not included
 
             if new_version > self._current_version:
-
                 self._update_ready = True
                 self._update_version = new_version
                 self._update_link = link
@@ -1356,7 +1355,7 @@ class SingletonUpdater:
             self._update_version = name  # this will break things
             self._update_link = link
         if not tg:
-            raise ValueError("Version tag not found: "+name)
+            raise ValueError("Version tag not found: " + name)
 
     def run_update(self, force=False, revert_tag=None, clean=False, callback=None):
         """Runs an install, update, or reversion of an addon from online source
@@ -1410,7 +1409,7 @@ class SingletonUpdater:
                     print("Update stopped, update link unavailable")
                 if callback:
                     callback(self._addon_package,
-                        "Update stopped, update link unavailable")
+                             "Update stopped, update link unavailable")
                 return "Update stopped, update link unavailable"
 
             if self._verbose and revert_tag is None:
@@ -1465,13 +1464,13 @@ class SingletonUpdater:
 
         now = datetime.now()
         last_check = datetime.strptime(self._json["last_check"],
-                                    "%Y-%m-%d %H:%M:%S.%f")
+                                       "%Y-%m-%d %H:%M:%S.%f")
         next_check = last_check
         offset = timedelta(
             days=self._check_interval_days + 30 * self._check_interval_months,
             hours=self._check_interval_hours,
             minutes=self._check_interval_minutes
-            )
+        )
 
         delta = (now - offset) - last_check
         if delta.total_seconds() > 0:
@@ -1489,7 +1488,7 @@ class SingletonUpdater:
         Will also rename old file paths to addon-specific path if found
         """
         json_path = os.path.join(self._updater_path,
-            "{}_updater_status.json".format(self._addon_package))
+                                 "{}_updater_status.json".format(self._addon_package))
         old_json_path = os.path.join(self._updater_path, "updater_status.json")
 
         # rename old file if it exists
@@ -1550,7 +1549,7 @@ class SingletonUpdater:
         outf.write(data_out)
         outf.close()
         if self._verbose:
-            print(self._addon+": Wrote out updater JSON settings to file, with the contents:")
+            print(self._addon + ": Wrote out updater JSON settings to file, with the contents:")
             print(self._json)
 
     def json_reset_postupdate(self):
@@ -1648,7 +1647,7 @@ class BitbucketEngine:
         self.name = "bitbucket"
 
     def form_repo_url(self, updater):
-        return self.api_url+"/2.0/repositories/"+updater.user+"/"+updater.repo
+        return self.api_url + "/2.0/repositories/" + updater.user + "/" + updater.repo
 
     def form_tags_url(self, updater):
         return self.form_repo_url(updater) + "/refs/tags?sort=-name"
@@ -1678,7 +1677,7 @@ class GithubEngine:
 
     def form_repo_url(self, updater):
         return "{}{}{}{}{}".format(self.api_url, "/repos/", updater.user, "/",
-                                updater.repo)
+                                   updater.repo)
 
     def form_tags_url(self, updater):
         if updater.use_releases:
@@ -1691,7 +1690,7 @@ class GithubEngine:
 
     def form_branch_url(self, branch, updater):
         return "{}{}{}".format(self.form_repo_url(updater), "/zipball/",
-                            branch)
+                               branch)
 
     def parse_tags(self, response, updater):
         if response is None:

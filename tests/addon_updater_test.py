@@ -43,10 +43,10 @@ which will manifest primarily as errors in the TestEngines unit tests.
 """
 
 import os
-import sys
 import unittest
 
 import bpy
+import sys
 
 if "text" in dir(bpy.context.space_data):
     # Running inside the python console in blender
