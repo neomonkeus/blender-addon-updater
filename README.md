@@ -567,17 +567,17 @@ For this reason, it is very important to be aware and setup tokens accordingly. 
 - GitLab: Supported through Personal Tokens
   - Tokens are not needed and should not be used for public repositories
   - Personal access tokens can be [viewed and created here](https://gitlab.com/profile/personal_access_tokens)
-  - Consider whether to provide an expiration date. Once expired any existing installs using the token will no longer successfully pull updates from private repositories. Therefore, if a user has the updater-enabled addon installed but leverages an expired token, they will not be able to update.
+  - Consider whether to provide an expiration date. Once expired any existing installations using the token will no longer successfully pull updates from private repositories. Therefore, if a user has the updater-enabled addon installed but leverages an expired token, they will not be able to update.
   - Tokens should be enabled for api *read access* only, to limit (mis) uses.
   - This token is *user* specific, *not* repository specific; therefore, anyone with the token is able to read anything via the GitLab api to any repository this user has access to. **For this reason,** it is very important to **NOT USE YOUR PERSONAL ACCOUNT** to create a token. Rather, you are better suited to create a secondary "machine user" account which is used only for the purpose of api access. This 'user' should be assigned to the project as a "reporter" for minimum required capabilities.
   - Use at own risk and ensure to do according research to ensure there are no security risks or possible backlashes due to providing updating for private repositories on GitLab.
-  - When in doubt, you can always revoke a personal token - but once revoked, it cannot be re-enabled and thus any existing installs using the token will no longer be able to pull from the private repo unless manually updating the addon themselves.
+  - When in doubt, you can always revoke a personal token - but once revoked, it cannot be re-enabled and thus any existing installations using the token will no longer be able to pull from the private repo unless manually updating the addon themselves.
   - These are only recommendations. As indicated by the GPL license, software is provided as-is and developers are not held liable to mishandling which results in unwanted consequences such as malicious exploit of a badly implemented private repository updating.
 - GitHub: Not yet supported
 - Bitbucket: Not yet supported
 
 # Issues or help
 
-If you are attempting to integrate this code into your addon and run into problems, [please open a new issue](https://github.com/CGCookie/blender-addon-updater/issues). As the module improves, it will be easier for more developers to integrate updating and improve blender's user experience overall!
+If you are attempting to integrate this code into your addon and run into problems, [please open a new issue](https://github.com/CGCookie/blender-addon-updater/issues). As the module improves, it will be easier for more developers to integrate updating and improve Blender's user experience overall!
 
 Please note that the updater code is built to be dependent on existing api's of the mentioned major source code repository sites. As these api's may be subject to change or interruption, updating capabilities may be impacted for existing users.
