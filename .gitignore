@@ -1,0 +1,4 @@
+/build/
+/dist/
+/tests/update_staging/
+/tests/_updater_status.json
