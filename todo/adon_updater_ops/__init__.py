@@ -30,7 +30,7 @@ from bpy.app.handlers import persistent
 # updater import, import safely
 # Prevents popups for users with invalid python installs e.g. missing libraries
 try:
-    from .addon_updater import Updater as updater
+    from addon_updater import Updater as updater
 except Exception as e:
     print("ERROR INITIALIZING UPDATER")
     print(str(e))
@@ -155,7 +155,6 @@ class AddonUpdaterInstallPopup(bpy.types.Operator):
         layout = self.layout
         if updater.invalid_updater:
             layout.label(text="Updater module error")
-            return
         elif updater.update_ready:
             col = layout.column()
             col.scale_y = 0.7

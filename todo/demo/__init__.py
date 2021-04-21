@@ -20,10 +20,10 @@ bl_info = {
 	"name":        "Addon Updater Demo",
 	"description": "Demo addon for showcasing the blender-addon-updater module",
 	"author":      "Patrick W. Crawford",
-	"version":     (1, 0, 9),
+	"version":     (0, 0, 1),
 	"blender":     (2, 80, 0),
 	"location":    "View 3D > Tool Shelf > Demo Updater",
-	"warning":     "",  # used for warning icon and text in addons panel
+	"warning":     "This is a demo add-on",  # used for warning icon and text in addons panel
 	"wiki_url":    "https://github.com/CGCookie/blender-addon-updater",
 	"tracker_url": "https://github.com/CGCookie/blender-addon-updater/issues",
 	"category":    "System"
